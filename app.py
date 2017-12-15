@@ -44,13 +44,13 @@ def generateMusic(inFile,ipString,offset,seqLen):
     n_vocab = len(set(inputNotes))
     if(n_vocab == 0):
         return "Empty input file"
-    #network_input, normalized_input = prepare_sequences(inputNotes, pitchnames, n_vocab)
+    network_input, normalized_input = prepare_sequences(inputNotes, pitchnames, n_vocab)
 	
     model = getModel()
     #print('network_input.shape[1]::',normalized_input.shape[1], '\t\tnetwork_input.shape[2]::', normalized_input.shape[2],'\tn_vocab::',n_vocab)
     pitchnames = sorted(set(item for item in notes))
     n_vocab = len(set(notes))
-    network_input, normalized_input = prepare_sequences(notes, pitchnames, n_vocab)
+    #network_input, normalized_input = prepare_sequences(notes, pitchnames, n_vocab)
     prediction_output = generate_notes(model, network_input, pitchnames, n_vocab,seqLen)
     create_midi(prediction_output,ipString,offset)
 	
