@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<title>Upload</title>
+</head>
+<body>
+	
+<form method=POST action="{{ url_for('prediction') }}">
+    <table>
+	<tr><td>Select Input File:</td>
+	<td> <select name="inFile" size="4">
+			<option value="Elsie">Elsie</option>
+			<option value="presto">presto</option>
+			<option value="sarabande">sarabande</option>
+			<option value="waldstein_1">waldstein_1</option>
+			<option value="5MIDIFiles">random 5 MIDI Files</option>
+			<option value="10MIDIFiels">random 10 MIDI Files</option>
+		 </select>
+	</td></tr>
+    <tr><td>File Name: </td>
+    <td><input type=text placeholder="Enter file name" name="fileName" maxlength="100" required></td></tr>
+	<tr><td>Offset: </td>
+    <td><input type="number" name="offset" min=0 max=1 step=0.01 required></td></tr>
+	<tr><td>Sequence Length: </td>
+    <td><input type="number" name="seqLen" min=50 max=1000 step=5 required></td></tr>
+    <tr><td><input type="submit" value="Submit" ></td></tr></table>
+</form>
+</body>
+</html>
