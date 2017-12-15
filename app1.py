@@ -8,7 +8,7 @@ from keras.layers import Activation
 from flask import Flask, jsonify, render_template, request
 import numpy as np
 
-app = Flask(__name__)
+app1 = Flask(__name__)
 
 def prepare_sequences(notes, pitchnames, n_vocab):
     """ Prepare the sequences used by the Neural Network """
@@ -154,4 +154,4 @@ def pred(input):
 	return str(inputData.shape)+ "<-->"+ input
 	
 if __name__ =="__main__" :
-	app.run(debug=True)
+	app1.run(debug=True)
