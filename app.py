@@ -5,7 +5,7 @@ from keras.layers import Dense
 from keras.layers import Dropout
 from keras.layers import LSTM
 from keras.layers import Activation
-from flask import Flask, jsonify, render_template, request
+from flask import Flask, jsonify, render_template, request,send_file
 import numpy as np
 
 app = Flask(__name__)
@@ -150,7 +150,7 @@ def prediction():
    seqLen= int(request.form['seqLen'])
    #response =  pred(str(request.form['msg']))
    midi = generateMusic(inFile,ipString,offset,seqLen)
-   return jsonify(midi)
+   return(send_file(filename_or_fp = ipString,mimetype="audio/midi",as_attachment=True))
 
 def pred(input):
 	return str(inputData.shape)+ "<-->"+ input
