@@ -11,7 +11,7 @@ import numpy as np
 app = Flask(__name__)
 
 def prepare_sequences(notes, pitchnames, n_vocab):
-    """ Prepare the sequences used by the Neural Network """
+    #""" Prepare the sequences used by the Neural Network """
     # map between notes and integers and back
     note_to_int = dict((note, number) for number, note in enumerate(pitchnames))
 
@@ -34,7 +34,7 @@ def prepare_sequences(notes, pitchnames, n_vocab):
     return (network_input, normalized_input)
 
 def generateMusic(inFile,ipString,offset,seqLen):
-    with open('BunchOfMIDI', 'rb') as filepath:
+    with open('Elsie', 'rb') as filepath:
 	    notes = pickle.load(filepath)
     with open(inFile, 'rb') as filepath:
         inputNotes = pickle.load(filepath)
@@ -50,7 +50,7 @@ def generateMusic(inFile,ipString,offset,seqLen):
     #print('network_input.shape[1]::',normalized_input.shape[1], '\t\tnetwork_input.shape[2]::', normalized_input.shape[2],'\tn_vocab::',n_vocab)
     pitchnames = sorted(set(item for item in notes))
     n_vocab = len(set(notes))
-    print('network_input.shape[1]::',normalized_input.shape[1], '\t\tnetwork_input.shape[2]::', normalized_input.shape[2],'\tn_vocab::',n_vocab)
+    #print('network_input.shape[1]::',normalized_input.shape[1], '\t\tnetwork_input.shape[2]::', normalized_input.shape[2],'\tn_vocab::',n_vocab)
     #network_input, normalized_input = prepare_sequences(notes, pitchnames, n_vocab)
     prediction_output = generate_notes(model, network_input, pitchnames, n_vocab,seqLen)
     create_midi(prediction_output,ipString,offset)
@@ -147,9 +147,6 @@ def prediction():
    midi = generateMusic(inFile,ipString,offset,seqLen)
    return(send_file(filename_or_fp = ipString,mimetype="audio/midi",as_attachment=True))
    #return(Response(ipString,mimetype="audio/midi",headers={"Content-Disposition":"attachment;filename=test.mid"}))
-
-def pred(input):
-	return str(inputData.shape)+ "<-->"+ input
 	
 if __name__ =="__main__" :
 	app.run(debug=True)
